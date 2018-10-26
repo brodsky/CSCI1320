@@ -3,7 +3,7 @@ using namespace std;
 
 // int x;
 
-int main () {
+int main() {
 	
 	int x=4;
 	cout << "X is " << x << endl;
