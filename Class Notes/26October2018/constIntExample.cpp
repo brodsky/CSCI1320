@@ -3,12 +3,12 @@ using namespace std;
 
 // int x;
 
-int main {
+int main () {
 	
-	x=4;
+	int x=4;
 	cout << "X is " << x << endl;
 
-	x=12
+	x=12;
 	cout << "X is " << x << endl;
 
 	return 0;
