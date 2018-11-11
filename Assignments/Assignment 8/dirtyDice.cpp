@@ -4,6 +4,7 @@
 // Standard setup:
 #include <iostream>
 #include <cstdlib>
+#include <unistd.h> // for sleep() function
 
 using namespace std;
 
@@ -26,10 +27,10 @@ int main(){
 
     // Announce who has won, depending on the returned value from loopGame.
     if (winner==0){
-        cout<<"The computer has won!"<<endl;
+        cout<<"The computer has won!"<<endl<<endl;
     }
     else{
-        cout<<"You've won - congratulations!"<<endl;
+        cout<<"You've won - congratulations!"<<endl<<endl;
     }
 }
 
@@ -46,20 +47,24 @@ bool loopGame(int targetPoints){
 
     // Based on whichever player was selected, assign startingPlayer to that player's identifier.
     if(whoseTurn==0){
-        cout<<endl<<"The computer has been randomly selected to go first." << endl;
-        currentPlayer = 1;
+        cout<<endl<<"The computer has been randomly selected to go first." << endl << endl;
+        currentPlayer = 0;
     }
     else{
-        cout<<endl<<"You have been randomly selected to go first!" << endl;
+        cout<<endl<<"You have been randomly selected to go first!" << endl << endl;
         currentPlayer = 1;
     }
 
     // This is the only code that should be run for the remainder of this function; use an infinite while loop until someone wins and the function returns a winner.
     while(1){
         if(currentPlayer==0){ // The computer's turn
-            int turnScore = oneTurn(currentPlayer); // Call oneTurn to play out the turn and return the number of points gained by the player
+            cout << "Current Player: Computer" << endl;
+            int turnScore = oneTurn(currentPlayer); // Call oneTurn to play out the turn and return the number of points gained by the player.
+
             compPoints+=turnScore; // Add the turn score to the computer's score
             humanPoints-=turnScore; // Subtract the turn score from the human's score
+            cout<<endl<<"SCORE:"<<endl<<"Human: "<<humanPoints<<endl<<"Computer: "<<compPoints<<endl<<endl;
+            sleep(uint(2)); // Wait 2 seconds so that player can see the score
 
             if(compPoints>=targetPoints){ // If the computer has won, break out of loopGame and return 0.
                 return 0;
@@ -67,10 +72,14 @@ bool loopGame(int targetPoints){
             currentPlayer=1; // Otherwise, change the player to the human.
         }
         if(currentPlayer==1){ // The human's turn
-            int turnScore = oneTurn(currentPlayer); // Call oneTurn to play out the turn and return the number of points gained by the player
+            cout << "Current Player: Human" << endl;
+            int turnScore = oneTurn(currentPlayer); // Call oneTurn to play out the turn and return the number of points gained by the player.
+
             humanPoints+=turnScore; // Add the turn score to the human's score
             compPoints-=turnScore; // Subtract the turn score from the computer's score
-            
+            cout<<endl<<"SCORE:"<<endl<<"Human: "<<humanPoints<<endl<<"Computer: "<<compPoints<<endl<< endl;
+            sleep(uint(2)); // Wait 2 seconds so that player can see the score
+
             if(humanPoints>=targetPoints){ // // If the human has won, break out of loopGame and return 1.
                 return 1;
             }
@@ -83,23 +92,61 @@ bool loopGame(int targetPoints){
 // oneTurn takes in a single boolean variable that tells it whether it’s the user’s turn or the computer’s turn (1 = human turn, 0 = computer turn). It then guides the player through their turn until a 3 is rolled or the player chooses to hold. At every important step, the function prints game data (turn total, player decision) to the console. When the turn is over, it returns the turn total as an integer value.
 int oneTurn(bool whoseTurn){
     int turnTotal = 0; // Reset the turn total to 0; this should only be done once for every time the function is called.
+    int playerChoice = 0; // Declare a variable that stores whether the player chooses to roll or hold
     
     while(1){ // Create an infinite loop that runs until a player's turn ends and their turn total is returned.
         int currentRoll = roll(); // Roll the die
 
-        if (currentRoll==3){ // If the player rolled a 3, return 3 and end their turn.
+        if (currentRoll==3){ // If the player rolled a 3, return 3 (thus ending the turn).
+            cout<<"Roll: 3. Player gains 3 points; turn over."<<endl;
+            sleep(uint(1));
             return 3;
         }
-        if (whoseTurn==0){ // If a 3 wasn't rolled and it's the human's turn, add the value of the roll to turnTotal and prompt them whether to roll or hold. If they roll, simply allow the fctn to continue running; if they hold, then  return their turn total to loopGame.
+        else{// If a 3 wasn't rolled, add the value of the roll to turnTotal and annouce it.
+            cout<<"Roll: " << currentRoll;
+            turnTotal+=currentRoll;
+            cout<<". The turn total is "<<turnTotal<<"."<<endl;
         }
-        else{ // If a 3 wasn't rolled and it's the computer's turn, add the value of the roll to turnTotal and use crude AI to determine whether to roll again or hold. The plan for crude AI is this: turnTotal will be plugged into a quadratic function. The chance that the computer rolls again will be set as 1/<result of quadratic function>, so the computer will be exponentially less likely to roll again depending on how many points it has gained.
+
+        if (whoseTurn==1){ // If it's the human's turn, prompt them whether to roll or hold.
+            cout<<endl<<"Would you like to roll or hold? Enter 1 to roll again or 0 to hold. ";
+            cin>>playerChoice;
+
+            // If player holds, then return their turn total to loopGame; if they roll, simply allow the fctn to continue running.
+            if(playerChoice==0){
+                cout<<endl<<"You have chosen to hold. Total score for this turn: "<<turnTotal<<endl;
+                return turnTotal;
+            }
+            else{
+                cout<<endl<<"You have chosen to roll again!"<<endl;
+            }
+        
+        }
+        else{ // If it's the computer's turn, use crude AI to determine whether to roll again or hold.
+            if(turnTotal<=5){ // If the turn total is less than 5, keep rolling no matter what.
+                cout<<endl<<"The computer has chosen to roll again!"<<endl;
+            }
+            else{ // If turnTotal is more than 5, randomly decide whether or not to roll again.
+                int probability = turnTotal*turnTotal*0.03 + 1; // Conciously allowing truncation of this value
+                int randomModulus=rand()%probability;
+
+                // If the modulus results in a remainder of 0, the computer rolls again (allows the loop to continue).
+                // This will become less likely as int(probability) goes up.
+                if (randomModulus==0){
+                    cout<<endl<<"The computer has chosen to roll again!"<<endl;
+                }
+                else{ // Otherwise, the computer holds.
+                    cout<<endl<<"The computer has chosen to hold. Total score for this turn: "<<turnTotal<<endl;
+                    return turnTotal;
+                }
+            }
         }
     }
 }
 
 // roll simulates a die and returns a random int between 1 and 6.
 int roll(){ 
-   return 4;
+   return (rand()%6 + 1);
 }
 
 
