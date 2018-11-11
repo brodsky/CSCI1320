@@ -88,7 +88,6 @@ bool loopGame(int targetPoints){
     }
 }
 
-
 // oneTurn takes in a single boolean variable that tells it whether it’s the user’s turn or the computer’s turn (1 = human turn, 0 = computer turn). It then guides the player through their turn until a 3 is rolled or the player chooses to hold. At every important step, the function prints game data (turn total, player decision) to the console. When the turn is over, it returns the turn total as an integer value.
 int oneTurn(bool whoseTurn){
     int turnTotal = 0; // Reset the turn total to 0; this should only be done once for every time the function is called.
@@ -148,6 +147,3 @@ int oneTurn(bool whoseTurn){
 int roll(){ 
    return (rand()%6 + 1);
 }
-
-
-
