@@ -27,9 +27,32 @@ int main(){
 }
 
 void sortArr(int array[], int arraySize, bool direction){
-    // Sorts a given array in either ascending order or descending order, depending on input arguments.
-    // sortArr will call the swap2 function in order to change the order of elements in the array.
-    swap2(array,0,1);
+
+    int startIndex = 0;
+    int endIndex = arraySize;
+    
+    for(int i=0; i<arraySize; i++){ // will run a number of times equal to arraySize
+
+        int maxVal = 0;
+        int maxIndex = 0;
+
+        for(int j=startIndex; j<endIndex; j++){ // will run a number of times equal to endIndex-startIndex
+            if(array[j]>=maxVal){
+                maxVal = array[j];
+                maxIndex = j;
+            }
+        }
+            
+        if(direction==1){ // for ascending
+            swap2(array, maxIndex, endIndex-1);
+            endIndex-=1;
+        }
+        else{ // for descending
+            swap2(array, maxIndex, startIndex);
+            startIndex+=1;
+        }
+        
+    }
 }
 
 // Swaps the elements in the given indices of array[].

@@ -3,23 +3,26 @@
 
 // Standard setup:
 #include <iostream>
-#include <cstdlib>
+#include <cstdlib> // for rand()
 using namespace std;
 
 // Declare functions:
 void randArrays(int arrayA[], int arrayB[], int arraySize);
 void sortArr(int array[], int arraySize, bool direction);
 void swap2(int array[], int index1, int index2);
-void arrayMerge(int arrayA[], int arrayB[], int arrayC[], int arraySize);
+void arrayMerge(int arrayA[], int arrayB[], int arrayC[], int smallArraySize);
 
 int main(){
 
     // Declare the number of elements each array should have:
     int arraySize = 10;
 
-    // Declare arrays for the randArrays function:
+    // Declare two arrays with the above-specified number of elements:
     int arrayA[arraySize];
     int arrayB[arraySize];
+
+    // Declare an array with twice the standard number of elements:
+    int arrayC[arraySize*2];
 
     // Call randArrays with the two arrays from above:
     randArrays(arrayA, arrayB, arraySize);
@@ -28,10 +31,7 @@ int main(){
     sortArr(arrayA, arraySize, 1);
     sortArr(arrayB, arraySize, 0);
 
-    // Create a new array of with twice the length of the previous arrays:
-    int arrayC[arraySize*2];
-
-    // Call arrayMerge with all three arrays and arraySize:
+    // Call arrayMerge with all three arrays and the standard arraySize:
     arrayMerge(arrayA, arrayB, arrayC, arraySize);
 
 }
@@ -63,32 +63,23 @@ void sortArr(int array[], int arraySize, bool direction){
     int startIndex = 0;
     int endIndex = arraySize;
     
-    for(int i=0; i<arraySize; i++){
+    for(int i=0; i<arraySize; i++){ // will run a number of times equal to arraySize
 
         int maxVal = 0;
         int maxIndex = 0;
 
-        if(direction==1){ // for ascending
-            for(int j=0; j<endIndex; j++){
-
-                if(array[j]>=maxVal){
-                    maxVal = array[j];
-                    maxIndex = j;
-                }
-
+        for(int j=startIndex; j<endIndex; j++){ // will run a number of times equal to endIndex-startIndex
+            if(array[j]>=maxVal){
+                maxVal = array[j];
+                maxIndex = j;
             }
-            swap2(array, maxIndex, endIndex);
+        }
+            
+        if(direction==1){ // for ascending
+            swap2(array, maxIndex, endIndex-1);
             endIndex-=1;
         }
         else{ // for descending
-            for(int j=startIndex; j<endIndex; j++){
-
-                if(array[j]>=maxVal){
-                    maxVal = array[j];
-                    maxIndex = j;
-                }
-
-            }
             swap2(array, maxIndex, startIndex);
             startIndex+=1;
         }
@@ -105,9 +96,9 @@ void swap2(int array[], int index1, int index2){
 }
 
 // Copies the elements of arrayA ​into first half of ​arrayC​ and elements of ​arrayB​ into second half of ​arrayC​.
-void arrayMerge(int arrayA[], int arrayB[], int arrayC[], int arraySize){
-    for(int i=0; i<arraySize; i++){
+void arrayMerge(int arrayA[], int arrayB[], int arrayC[], int smallArraySize){
+    for(int i=0; i<smallArraySize; i++){
         arrayC[i]=arrayA[i];
-        arrayC[i+arraySize]=arrayB[i];
+        arrayC[i+smallArraySize]=arrayB[i];
     }
 }

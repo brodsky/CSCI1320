@@ -3,24 +3,24 @@
 
 // Standard setup:
 #include <iostream>
-#include <cstdlib>
+#include <cstdlib> // for rand()
 using namespace std;
 
 // Declare functions:
 void randArrays(int arrayA[], int arrayB[], int arraySize);
-
 
 int main(){
 
     // Declare the number of elements each array should have:
     int arraySize = 10;
 
-    // Declare arrays for the randArrays function:
+    // Declare two arrays with the above-specified number of elements:
     int arrayA[arraySize];
     int arrayB[arraySize];
 
     // Call randArrays with the two arrays from above:
     randArrays(arrayA, arrayB, arraySize);
+
 }
 
 // Fills 2 arrays of a given length with random integers between 0 and 1000.

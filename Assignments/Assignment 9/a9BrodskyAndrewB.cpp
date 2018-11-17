@@ -3,7 +3,7 @@
 
 // Standard setup:
 #include <iostream>
-#include <cstdlib>
+#include <cstdlib> // for rand()
 using namespace std;
 
 // Declare functions:
@@ -11,13 +11,12 @@ void randArrays(int arrayA[], int arrayB[], int arraySize);
 void sortArr(int array[], int arraySize, bool direction);
 void swap2(int array[], int index1, int index2);
 
-
 int main(){
 
     // Declare the number of elements each array should have:
     int arraySize = 10;
 
-    // Declare arrays for the randArrays function:
+    // Declare two arrays with the above-specified number of elements:
     int arrayA[arraySize];
     int arrayB[arraySize];
 
@@ -27,6 +26,7 @@ int main(){
     // Now, call sortArr with each array:
     sortArr(arrayA, arraySize, 1);
     sortArr(arrayB, arraySize, 0);
+
 }
 
 // Fills 2 arrays of a given length with random integers between 0 and 1000.
@@ -56,32 +56,23 @@ void sortArr(int array[], int arraySize, bool direction){
     int startIndex = 0;
     int endIndex = arraySize;
     
-    for(int i=0; i<arraySize; i++){
+    for(int i=0; i<arraySize; i++){ // will run a number of times equal to arraySize
 
         int maxVal = 0;
         int maxIndex = 0;
 
-        if(direction==1){ // for ascending
-            for(int j=0; j<endIndex; j++){
-
-                if(array[j]>=maxVal){
-                    maxVal = array[j];
-                    maxIndex = j;
-                }
-
+        for(int j=startIndex; j<endIndex; j++){ // will run a number of times equal to endIndex-startIndex
+            if(array[j]>=maxVal){
+                maxVal = array[j];
+                maxIndex = j;
             }
-            swap2(array, maxIndex, endIndex);
+        }
+            
+        if(direction==1){ // for ascending
+            swap2(array, maxIndex, endIndex-1);
             endIndex-=1;
         }
         else{ // for descending
-            for(int j=startIndex; j<endIndex; j++){
-
-                if(array[j]>=maxVal){
-                    maxVal = array[j];
-                    maxIndex = j;
-                }
-
-            }
             swap2(array, maxIndex, startIndex);
             startIndex+=1;
         }
