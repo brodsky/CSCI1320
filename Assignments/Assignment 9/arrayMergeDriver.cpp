@@ -6,7 +6,7 @@
 using namespace std;
 
 // Declare functions:
-void arrayMerge(int arrayA[], int arrayB[], int arrayC[], int arraySize);
+void arrayMerge(int arrayA[], int arrayB[], int arrayC[], int arraySize); // function to be tested
 void arrayDisp(int arrayA[], int arrayB[], int arrayC[], int arraySize); // auxilary function to display the values of each array
 
 int main(){
@@ -24,18 +24,18 @@ int main(){
     // Call arrayMerge to combine arrayA and arrayB into arrayC:
     arrayMerge(arrayA, arrayB, arrayC, 4);
 
-    // Display the updated arrays:
+    // Display the updated arrays to see if A and B were merged into C:
     arrayDisp(arrayA, arrayB, arrayC, 4);
 }
 
 void arrayMerge(int arrayA[], int arrayB[], int arrayC[], int arraySize){
+    // Copies the elements of arrayA ​into first half of ​arrayC​ and elements of ​arrayB​ into second half of ​arrayC​.
     for(int i=0; i<arraySize; i++){
         arrayC[i]=arrayA[i];
         arrayC[i+arraySize]=arrayB[i];
     }
 }
 
-// Copies the elements of arrayA ​into first half of ​arrayC​ and elements of ​arrayB​ into second half of ​arrayC​.
 void arrayDisp(int arrayA[], int arrayB[], int arrayC[], int arraySize){
     // Use a for loop to go through and print each element of arrayA:
     cout<<"arrayA: ";

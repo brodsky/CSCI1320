@@ -11,61 +11,28 @@ void swap2(int array[], int index1, int index2); // sortArr relies on swap2, so 
 void arrayDisp(int arrayA[], int arrayB[], int arraySize); // auxilary function to display the values of each array
 
 int main(){
-    // Declare two arrays of length 7 to be sorted:
+    // Declare two arrays with 7 elements to be sorted:
     int arrayA[]={0,1,2,2,3,4,5};
     int arrayB[]={0,1,2,2,3,4,5};
 
-    // Display the values in each array to the command window:
+    // Display the values of each array to the command window:
     arrayDisp(arrayA, arrayB, 7);
 
     // Call sortArr with the two arrays from above:
     sortArr(arrayA, 7, 1); // will sort in ascending order
     sortArr(arrayB, 7, 0); // will sort in descending order
 
-    // Call arrayDisp again to see if arrays were sorted properly:
+    // Call arrayDisp again to display the values of the arrays and see if they were sorted properly:
     arrayDisp(arrayA, arrayB, 7);
 }
 
-// Fills 2 arrays of a given length with random integers between 0 and 1000.
 void sortArr(int array[], int arraySize, bool direction){
-
-    int startIndex = 0;
-    int endIndex = arraySize;
-    
-    for(int i=0; i<arraySize; i++){
-
-        int maxVal = 0;
-        int maxIndex = 0;
-
-        if(direction==1){ // for ascending
-            for(int j=0; j<endIndex; j++){
-
-                if(array[j]>=maxVal){
-                    maxVal = array[j];
-                    maxIndex = j;
-                }
-
-            }
-            swap2(array, maxIndex, endIndex);
-            endIndex-=1;
-        }
-        else{ // for descending
-            for(int j=startIndex; j<endIndex; j++){
-
-                if(array[j]>=maxVal){
-                    maxVal = array[j];
-                    maxIndex = j;
-                }
-
-            }
-            swap2(array, maxIndex, startIndex);
-            startIndex+=1;
-        }
-        
-    }
+    // Sorts a given array in either ascending order or descending order, depending on input arguments.
+    // sortArr will call the swap2 function in order to change the order of elements in the array.
+    swap2(array,0,1);
 }
 
-// Swaps the elements in the given indexes of array[].
+// Swaps the elements in the given indices of array[].
 void swap2(int array[], int index1, int index2){
     int element1 = array[index1];
     int element2 = array[index2];

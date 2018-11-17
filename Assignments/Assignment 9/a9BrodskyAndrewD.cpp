@@ -80,28 +80,19 @@ void sortArr(int array[], int arraySize, bool direction){
         int maxVal = 0;
         int maxIndex = 0;
 
-        if(direction==1){ // for ascending
-            for(int j=0; j<endIndex; j++){
+        for(int j=startIndex; j<endIndex; j++){
 
-                if(array[j]>=maxVal){
-                    maxVal = array[j];
-                    maxIndex = j;
-                }
-
+            if(array[j]>=maxVal){
+                maxVal = array[j];
+                maxIndex = j;
             }
             swap2(array, maxIndex, endIndex);
+        }
+            
+        if(direction==1){ // for ascending
             endIndex-=1;
         }
         else{ // for descending
-            for(int j=startIndex; j<endIndex; j++){
-
-                if(array[j]>=maxVal){
-                    maxVal = array[j];
-                    maxIndex = j;
-                }
-
-            }
-            swap2(array, maxIndex, startIndex);
             startIndex+=1;
         }
         

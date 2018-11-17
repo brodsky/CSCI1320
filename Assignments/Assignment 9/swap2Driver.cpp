@@ -13,23 +13,23 @@ int main(){
     // Declare a test array of length 5:
     int arrayA[]={0,1,2,3,4};
 
-    // Display the starting value of arrayA:
+    // Display the starting values of arrayA:
     arrayDisp(arrayA, 5);
 
     // Use swap2 to switch elements 0 and 4:
     swap2(arrayA,0,4);
 
-    // Display the new value of arrayA:
+    // Display the new values of arrayA:
     arrayDisp(arrayA, 5);
 
     // Now switch elements 1 and 3:
     swap2(arrayA,1,3);
     
-    // Display the new value of arrayA:
+    // Display the new values of arrayA:
     arrayDisp(arrayA, 5);
 }
 
-// Swaps the elements in the given indexes of array[].
+// Swaps the elements in the given indices of array[].
 void swap2(int array[], int index1, int index2){
     int element1 = array[index1];
     int element2 = array[index2];
