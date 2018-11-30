@@ -1,7 +1,45 @@
 // Code by Andrew Brodsky | SID: 107217786 | Final Project Pt. 1
 // Prof: Maciej Zagrodzki (CSCI 1320) | Section 110 | anbr6390@colorado.edu
 
-// 1. Reading in text, counting the number of words, creating test data.
-// You are given a text file containing the full text to the book Hunger Games, Book 1. The file has been pre-processed to remove all punctuation and down-case all characters.
-// A. Scan the entire file and count the total number of words. Display the total number of words to the terminal.
-// B. Write the first 100 words out to a new file. Call it “testText.txt”.
+// Include relevant libraries:
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+int main(){
+    // Create an input file stream object:
+    ifstream inputStream;
+
+    // Open HungerGames.txt with the input filestream object:
+    inputStream.open("HungerGames.txt");
+
+    // Count the number of words in HungerGames.txt:
+    int wordCount = 0;
+    while(!inputStream.eof()){
+        string tempString;
+        inputStream>>tempString;
+        wordCount++;
+    }
+
+    cout<<wordCount<<endl;
+
+    // Create an output file stream object:
+    ofstream outputStream;
+
+    // Write to a new file called testText.txt:
+    outputStream.open("testText.txt");
+
+    // Reset the input stream to the beginning of the file:
+    inputStream.seekg(0, inputStream.beg);
+
+    // Write the first 100 words of HungerGames.txt to testText.txt:
+    for(int i=0; i<100; i++){
+        string tempString;
+        inputStream>>tempString;
+        outputStream<<tempString<<" ";
+    }
+
+    return 0;
+}
