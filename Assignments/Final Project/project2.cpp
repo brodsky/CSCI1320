@@ -28,8 +28,8 @@ int main(){
 
     // Create a new array that will contain individual words of the cleaned file. Create an oversized array to be safe.
 
-    int dirtyWordCount = 100000;
-    string cleanWordsArr[dirtyWordCount];
+    int cleanWordCount = 100000;
+    string cleanWordsArr[cleanWordCount];
 
     // Now, check every word in the dirty file to see if it's a word we should ignore. If it's not, write it to cleanFileArray.
     int cleanWordsPos = 0;
@@ -48,7 +48,7 @@ int main(){
 
         // If the flag was set, don't write the word to the clean array. Otherwise, do so.
         if(!flag){
-            cleanWordsArr[cleanWordsPos]= currentWord;
+            cleanWordsArr[cleanWordsPos]=currentWord;
             cleanWordsPos++;
         }
     }
