@@ -15,24 +15,26 @@ struct UniqueWord{
 
 int main(){
 
-    // Create input stream and open the cleaned Hunger Games file:
+    // Create an input stream and open the cleaned Hunger Games file:
     ifstream inputStream;
     inputStream.open("cleanedHungerGames.txt");
 
     // Declare an array of UniqueWord structs with an excess of elements:
     UniqueWord wordArr[100000];
 
-    // Declare iterator variable for use inside the while loop:
+    // Declare indexing variable for use inside the while loop:
     int uniquePos=0;
+
+    // Create a string called currentWord that will hold inputs from inputStream:
+    string currentWord;
 
     // While loop runs as long as the filestream hasn't reached the end. This will effectively act like a for loop that runs over all the words in cleanedHungerGames.txt.
     while(!inputStream.eof()){
 
-        // Create a string called currentWord and write whatever comes in from inputStream to it:
-        string currentWord;
+        // Write incoming data from inputStream to currentWord:
         inputStream >> currentWord;
 
-        // Create a flag boolean value for later use:
+        // Create a flag boolean that will record whether or not a struct already exists for a given word:
         bool flag = 0;
 
         // Every time that the while loop runs (i.e. every time it reads in a new word), check if there's already a struct in wordArr that has been created for that word. If there is, just increment the number of occurrences in that word's struct and set the flag. Note that uniquePos was set at 0 in its declaration, so we effectively start from a clean slate here.
@@ -46,7 +48,7 @@ int main(){
 
         }
 
-        // If the flag wasn't set (meaning that a pre-existing struct for currentWord wasn't found), create one for it in wordArr and increment the iterator that records how many unique words we've found.
+        // If the flag wasn't set (meaning that a pre-existing struct for currentWord wasn't found), create one for it in wordArr and set the number of occurrences to 1.
         if(!flag){
             wordArr[uniquePos].word = currentWord;
             wordArr[uniquePos].numOccur = 1;
@@ -81,13 +83,13 @@ int main(){
         string lastWord = wordArr[endPos-1].word;
         int lastNum = wordArr[endPos-1].numOccur;
 
-        // Now, write the data from the struct in maxIndex position to the struct in the final position and write the data from the temporary variables to the struct in maxIndex position
+        // Now, write the data from the struct in index maxIndex to the struct in the final index. Then, write the data from the temporary variables to the struct in index maxIndex.
         wordArr[endPos-1].word = wordArr[maxIndex].word;
         wordArr[endPos-1].numOccur = wordArr[maxIndex].numOccur;
         wordArr[maxIndex].word = lastWord;
         wordArr[maxIndex].numOccur = lastNum;
 
-        // Decrement the endPos so that the sorting algorithm won't mess with the now-sorted maximum index or anything above it.
+        // Decrement the endPos so that the sorting algorithm won't mess with the now-sorted maximum index or any indices above it.
         endPos--;
     }
 

@@ -16,7 +16,7 @@ struct wordPairs{
 
 int main(){
 
-    // Create input stream and open the cleaned Hunger Games file:
+    // Create an input stream and open the cleaned Hunger Games file:
     ifstream inputStream;
     inputStream.open("cleanedHungerGames.txt");
 
@@ -34,7 +34,7 @@ int main(){
     // While loop runs as long as the filestream hasn't reached the end. This will effectively act like a for loop that runs over all the words in cleanedHungerGames.txt.
     while(!inputStream.eof()){
 
-        // To get the algorithm running properly, we need to get two inputs from inputStrean during our first run of the loop; we use the startup boolean for this task.
+        // To get the algorithm running properly, we need to get two inputs from inputStream during our first run of the loop; we use the startup boolean for this task.
         if(startup){
             inputStream >> currentWord1;
             inputStream >> currentWord2;
@@ -44,7 +44,7 @@ int main(){
             inputStream >> currentWord2;
         }
 
-        // Create a flag boolean value for later use:
+        // Create a flag boolean that will record whether or not a struct already exists for a given word:
         bool flag = 0;
 
         // Every time that the while loop runs (i.e. every time it reads in a new word), check if there's already a struct in wordArr that has been created for the current word combo. If there is, just increment the number of occurrences in that combo's struct and set the flag. Note that uniquePos was set at 0 in its declaration, so we effectively start from a clean slate here.
@@ -99,7 +99,7 @@ int main(){
         string lastWord2 = wordArr[endPos-1].word2;
         int lastNum = wordArr[endPos-1].numOccur;
 
-        // Now, write the data from the struct in maxIndex position to the struct in the final position and write the data from the temporary variables to the struct in maxIndex position.
+        // Now, write the data from the struct in index maxIndex to the struct in the final index. Then, write the data from the temporary variables to the struct in index maxIndex.
         wordArr[endPos-1].word1 = wordArr[maxIndex].word1;
         wordArr[endPos-1].word2 = wordArr[maxIndex].word2;
         wordArr[endPos-1].numOccur = wordArr[maxIndex].numOccur;
@@ -108,7 +108,7 @@ int main(){
         wordArr[maxIndex].word2 = lastWord2;
         wordArr[maxIndex].numOccur = lastNum;
 
-        // Decrement the endPos so that the sorting algorithm won't mess with the now-sorted maximum index or anything above it.
+        // Decrement the endPos so that the sorting algorithm won't mess with the now-sorted maximum index or any indices above it.
         endPos--;
     }
 

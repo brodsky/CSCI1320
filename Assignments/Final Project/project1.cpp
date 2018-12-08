@@ -15,15 +15,15 @@ int main(){
     // Open HungerGames.txt with the input filestream object:
     inputStream.open("HungerGames.txt");
 
-    // Count the number of words in HungerGames.txt:
+    // Count the number of words in HungerGames.txt by seeing how many times it writes a word to a given string:
     int wordCount = 0;
+    string tempString;
     while(!inputStream.eof()){
-        string tempString;
         inputStream>>tempString;
         wordCount++;
     }
 
-    cout<<wordCount<<endl;
+    cout<<"Word Count: "<<wordCount<<endl;
 
     // Create an output file stream object:
     ofstream outputStream;
@@ -34,9 +34,8 @@ int main(){
     // Reset the input stream to the beginning of the file:
     inputStream.seekg(0, inputStream.beg);
 
-    // Write the first 100 words of HungerGames.txt to testText.txt:
+    // Write the first 100 words of HungerGames.txt to testText.txt. We can reuse tempString here to store incoming words from the file stream:
     for(int i=0; i<100; i++){
-        string tempString;
         inputStream>>tempString;
         outputStream<<tempString<<" ";
     }
