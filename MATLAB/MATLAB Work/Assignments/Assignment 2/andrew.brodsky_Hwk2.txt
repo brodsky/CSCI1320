@@ -1,0 +1,219 @@
+Andrew Brodsky | SID: 107217786 | Assignment 2 | Prof: Maciej Zagrodzki (CSCI 1320)
+---------------------------------
+
+------
+TASK 1
+------
+
+Pseudocode:
+ - Calculate the first number divided by the second number.
+ - Compare the result of the calculation to the two original numbers. If it is more than the first number and less than the second number, output TRUE. Else, output FALSE.
+
+appendedbrodskyAndrewCalcScriptA.m:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+% Code by Andrew Brodsky | SID: 107217786 | Assignment 2
+% Prof: Maciej Zagrodzki | Section 110 | anbr6390@colorado.edu
+%
+% This script takes two floating-point numbers and then outputs
+% the following calculations:
+%
+% 1. First number + second number
+% 2. First number - second number
+% 3. First number * second number
+% 4. First number / second number
+% 5. First number^(second number)
+%
+% 6. Logical comparison of the result of calculation 4 to the 
+% two original numbers. If first number<result of calculation 
+% 4<second number, then result is TRUE; else, result is FALSE.
+
+%------------------------------
+
+% Clear the command window and any variables in the workspace.
+clc;
+clear;
+
+% Read in two floating point inputs. Default data type of double will be
+% adequate for this purpose.
+numberOne = 5;
+numberTwo = 5;
+
+% Perform and output calculations. Escape character of %g is used so that
+% numbers smaller than 10^-6 appear in exponential form and not as 
+% 0.000000.
+
+fprintf('When the first number is %g and the second number is %g: \n\n', numberOne, numberTwo);
+
+fprintf('The first number plus the second number is %g. \n', (numberOne+numberTwo));
+fprintf('The first number minus the second number is %g. \n', (numberOne-numberTwo));
+fprintf('The first number times the second number is %g. \n', (numberOne*numberTwo));
+fprintf('The first number divided by the second number is %g. \n', (numberOne/numberTwo));
+fprintf('The first number to the power of the second number is %g. \n\n', (numberOne^numberTwo));
+
+fprintf('Is %g<%g<%g? Answer (logical): %d. \n', numberOne, numberOne/numberTwo, numberTwo, (numberOne<(numberOne/numberTwo) && (numberOne/numberTwo)<numberTwo));
+
+------
+TASK 2
+------
+
+addFunc.m
+~~~~~~~~~
+
+function output = addFunc(input1, input2)
+% Given two real numbers, this function adds input1 to input2 and then
+% returns the result of that calculation.
+
+output = input1+input2;
+end
+
+
+subtractFunc.m
+~~~~~~~~~~~~~~
+
+function output = subtractFunc(input1, input2)
+% Given two real numbers, this function subtracts input2 from input1 and
+% then returns the result of that calculation.
+
+output = input1-input2;
+end
+
+multFunc.m
+~~~~~~~~~~
+
+function output = multFunc(input1, input2)
+% Given two real numbers, this function multiplies input1 by input2 and
+% then returns the result of that calculation.
+
+output = input1*input2;
+end
+
+divbyFunc.m
+~~~~~~~~~~~
+
+function output = divbyFunc(input1, input2)
+% Given two real numbers, this function divides input1 by input2 and then
+% returns the result of that calculation.
+
+output = input1/input2;
+end
+
+divintoFunc.m
+~~~~~~~~~~~~~
+
+function output = divintoFunc(input1, input2)
+% Given two real numbers, this function divides input1 into input2 (which 
+% really means input2/input1) and then returns the result of that calculation.
+
+output = input1\input2;
+end
+
+quotientInBoundsFunc.m
+~~~~~~~~~~~~~~~~~~~~~~
+
+function output = quotientInBoundsFunc(input1, input2)
+% Given two real numbers, this function checks to see if
+% input1<(input1/input2)<input2 and then outputs a logical value based on
+% that comparison.
+
+output = (input1<(input1/input2) && (input1/input2)<input2);
+end
+
+------
+TASK 3
+------
+
+brodskyAndrewCalcScriptB.m
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+% Code by Andrew Brodsky | SID: 107217786 | Assignment 2
+% Prof: Maciej Zagrodzki | Section 110 | anbr6390@colorado.edu
+%
+% This script takes two floating-point numbers and then outputs
+% the following calculations:
+%
+% 1. First number + second number
+% 2. First number - second number
+% 3. First number * second number
+% 4. First number / second number
+% 5. First number \ second number
+% 6. Logical comparison of the result of calculation 4 to the 
+% original numbers. If first number<result of calculation 4<
+% second number, then result is TRUE; else, result is FALSE.
+
+%------------------------------
+
+% Clear the command window and any variables in the workspace.
+clear;
+clc;
+
+% Read in two floating point inputs. Default data type of double will be
+% adequate for this purpose.
+numberOne = 5;
+numberTwo = 5;
+
+% Perform and output calculations. Escape character of %g is used so that
+% numbers smaller than 10^-6 appear in exponential form and not as 
+% 0.000000.
+
+fprintf('When the first number is %g and the second number is %g: \n\n', numberOne, numberTwo);
+
+fprintf('The first number plus the second number is %g. \n', addFunc(numberOne,numberTwo));
+fprintf('The first number minus the second number is %g. \n', subtractFunc(numberOne,numberTwo));
+fprintf('The first number times the second number is %g. \n', multFunc(numberOne,numberTwo));
+fprintf('The first number divided by the second number is %g. \n', divbyFunc(numberOne,numberTwo));
+fprintf('The first number divided *into* the second number is %g. \n\n', divintoFunc(numberOne,numberTwo));
+
+fprintf('Is %g < %g < %g? \n - Answer (logical): %d. \n', numberOne, divbyFunc(numberOne,numberTwo), numberTwo, quotientInBoundsFunc(numberOne,numberTwo)); 
+
+------
+TASK 4
+------
+
+carnot.m:
+~~~~~~~~~
+
+% This script prompts the user for the hot and cold reservoir temperatures,
+% calls carnotFunction() to determine the maximum possible efficiency of
+% the heat engine, and then prints the returned efficiency to the command
+% window with 3 decimal places.
+
+% Clear command window and any variables in the workspace.
+clear;
+clc;
+
+hotInput = input('Enter the temperature (in Kelvin) of the hot reservoir: ');
+coldInput = input('Enter the temperature (in Kelvin) of the cold reservoir: ');
+
+fprintf('The Carnot efficiency of the given engine is %.3f. \n', carnotEfficiencyCalculator(hotInput, coldInput));
+
+
+carnotEfficiencyCalculator.m:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+function carnotEfficiencyOut = carnotEfficiencyCalculator(hotReservoir,coldReservoir)
+
+% This function determines the Carnot efficiency of a heat engine, given
+% the temperatures (in Kelvin) of its hot and cold reservoirs.
+
+carnotEfficiencyOut = 1-(coldReservoir/hotReservoir);
+end
+
+------
+TASK 5
+------
+
+A. There are seven different possible combinations.
+
+B. >> (x&&y)||(~z)
+
+C. 
+
+   x=0   y=0   z=0  |  result=1
+   x=1   y=0   z=0  |  result=1
+   x=1   y=1   z=0  |  result=1
+   x=1   y=1   z=1  |  result=1
+   x=0   y=1   z=1  |  result=0
+   x=0   y=1   z=0  |  result=1
+   x=0   y=0   z=1  |  result=0
+
