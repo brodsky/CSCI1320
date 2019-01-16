@@ -1,0 +1,49 @@
+>> % 7 September 2018
+>>
+>> clear %clears all variables from the workspace
+>> 
+>> currentTemp = 150
+
+currentTemp =
+
+   150
+
+>> targetTemp = 151;
+>> % can get rid of the output of setting a variable by adding a semicolon at end of line
+
+>> isTarget = currentTemp == targetTemp
+
+isTarget =
+
+  logical
+
+   0
+
+>> currentTemp = 151;
+>> isTarget
+
+isTarget =
+
+  logical
+
+   0
+
+>> % have to reset isTarget; doesn't continually update
+>> isTarget = currentTemp == targetTemp
+
+isTarget =
+
+  logical
+
+   1
+
+>> maxTemp=160;
+>> isTarget = (currentTemp == targetTemp) && (currentTemp < maxTemp)
+
+isTarget =
+
+  logical
+
+   1
+
+>>

@@ -1,0 +1,27 @@
+Pseudocode by Andrew Brodsky | SID: 107217786 | Lab 3
+Prof: Maciej Zagrodzki (CSCI 1320) | Section 110 | anbr6390@colorado.edu
+
+Pseudocode for process of time conversion:
+------------------------------------------ 
+
+- From a master script, ask user for the hours, minutes, and seconds of the time they wish to convert (ask as three separate *integer* inputs).
+ - Ask the user if the time they entered is 12 hour format or 24 hour format. If the time is in 12 hour format, then ask the user whether their time is AM or PM. Else, set the suffix variable to empty.
+
+- Using the above inputs as arguments, call a function getInputs, which does the following:
+	- Check for the following errors:
+        - If minutes<0 or minutes>59, throw an error.
+        - If seconds<0 or seconds>59, throw an error.
+        - If time format == 12 and hour<1 or hour>12, throw an error.
+        - If time format == 24 and hour<0 or hour>23, throw an error.
+        - If time format isn't 12 or 24, throw an error.
+        - If time format == 12 and suffix isn't 'AM' or 'PM', throw an error.
+    - If no errors occur, then return nothing.
+
+- From the master script, call a function convertTime with hours, time format, and suffix as arguments. convertTime does the following:
+	- If time format is 12 hour, then add 12 to the hour variable if it is PM; otherwise, leave the hour variable alone. In either case, change suffix to 'hours' and change time format to 24.
+	- If time format is 24 hour, then subtract 12 from the hour variable if it is more than 12 and change suffix to 'PM'; otherwise, leave the hour variable alone and change suffix to 'AM'. In either case, change time format to 12.
+	- Return the adjusted hour variable, the adjusted time format, and the adjusted time suffix back to the master script.
+
+- From the master script, call a function displayTime with the returned values from convertTime as arguments. displayTime does the following:
+	- Neatly output the time with a statement to the effect of, "The time in <time format> format is <hours>:<minutes>:<seconds> <suffix>."
+	- Return nothing.
