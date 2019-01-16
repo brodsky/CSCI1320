@@ -1,5 +1,5 @@
 # CSCI 1320 at CU Boulder - Fall 2018
-This repository contains all of my labs and assignments from CSCI 1320, including both MATLAB and C++ code. Reference and reuse of this code may be made freely in accordance with CC BY-NC-SA 4.0 (but do it ethically).
+This repository contains all of my labs and assignments from CSCI 1320 - including both MATLAB and C++ code - as well as some assorted class notes. Reference and reuse of this code may be made freely in accordance with CC BY-NC-SA 4.0 (but do it ethically, please).
 \
 \
 \
